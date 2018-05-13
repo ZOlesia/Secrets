@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container">
+        <% if(messages.secret_creation) { %>
+            <% for (var x of messages.secret_creation) { %>
+            <h6 class="text-danger"><%= x %></h6>
+            <% } %>
+        <% } %>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+        <form action="/add/secret" method="POST" class="form-group right col-xs-6 col-md-4">
+            Tell Your Secret <input type="text" name="secret" class="form-control"> 
+            <input type="submit" class="btn btn-info">
+        </form>
+
+        <div>
+            <h1>All the Secrets</h1>
+            <% for(var i in all_secrets) { %>
+                <p><a href="/secret/<%= all_secrets[i]._id%>"><%= all_secrets[i].secret %></a>
+                    <% for  (var j in currentUserSecrets){ %>
+                        <% if(all_secrets[i].secret == currentUserSecrets[j].secret){ %>
+                            <a class="btn btn-danger btn-sm" href="/delete/<%= all_secrets[i]._id%>">Delete</a>
+                        <% } %>
+                    <% } %>
+                </p>                
+            <% } %>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container">
+        <a href="/secrets" class="btn btn-secondary">All Secrets</a>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+        <h2><%= secret.secret %></h2>
+        <% for(var i in comments) { %>
+            <p><%= comments[i].comment %></p>
+        <% } %>
+        <form action="/add/comment" method="POST" class="form-group right col-xs-6 col-md-4">
+            <input type="hidden" value="<%= secret._id %>" name="secretId">
+            <input type="text" name="comment" placeholder="Leave your comment here ..." class="form-control">
+            <input type="submit" value="Send" class="btn btn-info">
+        </form>
+        <% if(messages.comment_creation) { %>
+            <% for (var x of messages.comment_creation) { %>
+            <h6 class="text-danger"><%= x %></h6>
+            <% } %>
+        <% } %>
+    </div>
+</body>
+</html>
